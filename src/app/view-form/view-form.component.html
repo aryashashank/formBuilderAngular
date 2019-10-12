@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="form-container">
+        <div class="form-title">
+        <b>{{formJson.formName}}</b> 
+        </div>
+        <div class="form" *ngFor="let item of formJson.formComponents">
+            <b> {{item.title | titlecase }}</b>
+            <div class="text" *ngIf="item.inputType == 'static'">
+                {{item.value}}
+            </div>
+            <div class="text" *ngIf="item.inputType == 'text'">
+                <input placeholder="{{item.placeHolder | titlecase}}" type="{{item.inputType}}">
+            </div>
+            <div class="radio-container" *ngIf="item.inputType == 'radio'">
+                <div class="radio" *ngFor="let option of item.options">
+                    <input type="{{item.inputType}}" name="{{item.title}}" value="{{option}}">
+                    <label for="{{option}}">{{option | titlecase}}</label>
+                </div>
+            </div>
+            <div class="dropdown-container" *ngIf="item.inputType == 'dropdown'">
+                <div class="dropdown">
+                    <select name="cars">
+                        <option value="{{option}}" *ngFor="let option of item.options" >{{option}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
