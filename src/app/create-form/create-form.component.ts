@@ -15,7 +15,15 @@ export class CreateFormComponent implements OnInit {
 
   private formJson = {
     title: '',
-    formComponents: []
+    formComponents: [
+      {
+        id: 4,
+        title: 'gender',
+        inputType: 'radio',
+        options: [{ value: 'male' },
+        { value: 'female' }]
+      }
+    ]
   };
 
   addComponent(type) {
@@ -34,7 +42,7 @@ export class CreateFormComponent implements OnInit {
   }
 
   addOption(item) {
-    item.options.push('');
+    item.options.push({ value: '' });
   }
 
   downloadJson() {
@@ -42,7 +50,7 @@ export class CreateFormComponent implements OnInit {
     var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.formJson));
     var dlAnchorElem = document.getElementById('downloadAnchorElem');
     dlAnchorElem.setAttribute("href", dataStr);
-    dlAnchorElem.setAttribute("download", "scene.json");
+    dlAnchorElem.setAttribute("download", `${this.formJson.title}_form.json`);
     dlAnchorElem.click();
   }
 

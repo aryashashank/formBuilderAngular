@@ -39,14 +39,16 @@ export class ViewFormComponent implements OnInit {
         id:4,
         title: 'gender',
         inputType: 'radio',
-        options:['male', 'female']
+        options:[{value:'male'}, 
+      {value:'female'}]
       },
       {
         id:5,
         title: 'Role',
         inputType: 'dropdown',
-        options:['President', 'V P Education', 'VP Public Relations', 'VP Membership', 'Secretary', 'Treasurer']
+        options:[{value:'President'}, {value:'V P Education'}, {value:'VP Public Relations'}, {value:'VP Membership'}, {value:'Secretary'}, {value:'Treasurer'}]
       }
+      
     ]
   }
 

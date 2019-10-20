@@ -20,7 +20,7 @@
             <div class="radio-container" *ngIf="item.inputType == 'radio'">
                 <div class="radio" *ngFor="let option of item.options;let i = index;">
                     {{i+1}}: <input type="radio" disabled>
-                    <input type="text" name="{{item.title}}" [(ngModel)]="option">
+                    <input type="text" name="{{item.title}}" [(ngModel)]="option.value">
                 </div>
                 <button (click)=addOption(item)>Add Option</button>
                 <hr>
