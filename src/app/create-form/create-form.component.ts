@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgModel } from '@angular/forms';
-
+import { ShareFormService } from '../services/share-form.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-create-form',
   templateUrl: './create-form.component.html',
@@ -8,23 +9,24 @@ import { NgModel } from '@angular/forms';
 })
 export class CreateFormComponent implements OnInit {
 
-  constructor() { }
-
+  
+  constructor(private shareForm: ShareFormService, private router: Router) { }
+  formJson:any;
   ngOnInit() {
+    this.shareForm.formStateObservable.subscribe(
+      message => {
+        this.formJson = message;
+        console.log(this.formJson);
+        
+      });
   }
 
-  private formJson = {
-    title: '',
-    formComponents: [
-      {
-        id: 4,
-        title: 'gender',
-        inputType: 'radio',
-        options: [{ value: 'male' },
-        { value: 'female' }]
-      }
-    ]
-  };
+  newMessage() {
+    this.shareForm.updateForm({
+      ...this.formJson
+    });
+    this.router.navigate(['/view']);
+  }
 
   addComponent(type) {
     let component: any = {
@@ -32,7 +34,7 @@ export class CreateFormComponent implements OnInit {
       inputType: type
     }
     if (type == 'radio' || type == 'dropdown') {
-      component.options = [''];
+      component.options = [{value: ''}];
     }
     if (type == 'static') {
       component.value = '';
@@ -46,7 +48,6 @@ export class CreateFormComponent implements OnInit {
   }
 
   downloadJson() {
-    debugger;
     var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.formJson));
     var dlAnchorElem = document.getElementById('downloadAnchorElem');
     dlAnchorElem.setAttribute("href", dataStr);

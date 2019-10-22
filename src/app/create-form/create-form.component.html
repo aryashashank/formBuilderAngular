@@ -2,7 +2,7 @@
     <div class="form-container">
 
         <div class="form-title">
-            <b>Form Name:</b> <input type="text" name="formTitle" [(ngModel)]="formJson.title" id="formTitle">
+            <b>Form Name:</b> <input type="text" name="formTitle" [(ngModel)]="formJson.formName" id="formTitle">
             <hr>
         </div>
         <div class="form" *ngFor="let item of formJson.formComponents">
@@ -27,7 +27,7 @@
             </div>
             <div class="dropdown-container" *ngIf="item.inputType == 'dropdown'">
                 <div class="dropdown" *ngFor="let option of item.options;let i = index;">
-                    {{i+1}}: <input type="text" name="{{item.title}}" [(ngModel)]="option">
+                    {{i+1}}: <input type="text" name="{{item.title}}" [(ngModel)]="option.value">
                 </div>
                 <button (click)=addOption(item)>Add Option</button>
                 <hr>
@@ -43,5 +43,6 @@
         </div>
     </div>
     <button (click)="downloadJson()"> Download JSON</button>
+    <button (click)="newMessage()">Set value</button>
 </div>
 <a id="downloadAnchorElem" style="display:none"></a>
