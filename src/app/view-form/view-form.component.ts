@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ShareFormService } from '../services/share-form.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-view-form',
@@ -8,7 +9,7 @@ import { ShareFormService } from '../services/share-form.service';
 })
 export class ViewFormComponent implements OnInit {
 
-  constructor(private shareForm:ShareFormService) { }
+  constructor(private router: Router ,private shareForm:ShareFormService) { }
   public formJson:object;
   ngOnInit() {
    
@@ -20,4 +21,10 @@ export class ViewFormComponent implements OnInit {
       });
 
   }
+
+  submitForm(){
+    this.router.navigate(['/create']);
+  }
+
+
 }
