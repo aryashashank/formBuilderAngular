@@ -1,7 +1,7 @@
 <div class="container">
     <div class="form-container">
         <div class="form-title">
-        <b>{{formJson.formName}}</b> 
+            <b>{{formJson.formName}}</b>
         </div>
         <div class="form" *ngFor="let item of formJson.formComponents">
             <b> {{item.title | titlecase }}</b>
@@ -13,14 +13,21 @@
             </div>
             <div class="radio-container" *ngIf="item.inputType == 'radio'">
                 <div class="radio" *ngFor="let option of item.options">
-                    <input type="{{item.inputType}}" name="{{item.title}}" value="{{option.id}}">
-                    <label for="{{option}}">{{option.value | titlecase}}</label>
+                    <div class="field">
+                        <span class="field-left">
+                            <input type="{{item.inputType}}" name="{{item.title}}" value="{{option.value}}">
+                        </span>
+                        <span class="field-right">
+                            <label for="{{option}}">{{option.value | titlecase}}</label>
+                        </span>
+                    </div>
+
                 </div>
             </div>
             <div class="dropdown-container" *ngIf="item.inputType == 'dropdown'">
                 <div class="dropdown">
                     <select name="cars">
-                        <option value="{{option.value}}" *ngFor="let option of item.options" >{{option.value}}</option>
+                        <option value="{{option.value}}" *ngFor="let option of item.options">{{option.value}}</option>
                     </select>
                 </div>
             </div>

@@ -1,48 +1,71 @@
 <div class="container">
+    <h1>Create your form</h1>
     <div class="form-container">
 
         <div class="form-title">
-            <b>Form Name:</b> <input type="text" name="formTitle" [(ngModel)]="formJson.formName" id="formTitle">
-            <hr>
+            <div class="field">
+                <span class="field-right"> <input type="text" name="formTitle" placeholder="Form Name"
+                        [(ngModel)]="formJson.formName" id="formTitle">
+                </span>
+            </div>
         </div>
         <div class="form" *ngFor="let item of formJson.formComponents">
-            Name: <input type="text" [(ngModel)]="item.title">
+            <div class="field">
+                <span class="field-right"><input type="text" placeholder="Field Name" [(ngModel)]="item.title"></span>
+            </div>
+
             <div class="text" *ngIf="item.inputType == 'static'">
-                Details: <input type="text" placeholder="Your paragraph here" [(ngModel)]="item.value">
-                <hr>
+                <div class="field">
+                    <span class="field-right"> <input type="text" placeholder="Your description here"
+                            [(ngModel)]="item.value"></span>
+                </div>
             </div>
 
             <div class="text" *ngIf="item.inputType == 'text'">
+                <div class="field">
+                    <span class="field-right"><input placeholder="short answer text" disabled type="{{item.inputType}}">
+                    </span>
+                </div>
 
-                <input placeholder="short answer text" disabled type="{{item.inputType}}">
-                <hr>
             </div>
             <div class="radio-container" *ngIf="item.inputType == 'radio'">
                 <div class="radio" *ngFor="let option of item.options;let i = index;">
-                    {{i+1}}: <input type="radio" disabled>
-                    <input type="text" name="{{item.title}}" [(ngModel)]="option.value">
+                    <div class="field">
+                        <span class="field-left"><input type="radio" disabled> </span>
+                        <span class="field-right">
+                            <input type="text" placeholder="Option Name" name="{{item.title}}" [(ngModel)]="option.value"></span>
+                    </div>
+
                 </div>
-                <button (click)=addOption(item)>Add Option</button>
-                <hr>
+                <button class="optn-btn" (click)=addOption(item)>Add Option</button>
+
             </div>
             <div class="dropdown-container" *ngIf="item.inputType == 'dropdown'">
                 <div class="dropdown" *ngFor="let option of item.options;let i = index;">
-                    {{i+1}}: <input type="text" name="{{item.title}}" [(ngModel)]="option.value">
+                    <div class="field">
+                        <span class="field-left">
+                            {{i+1}}.
+                        </span>
+                        <span class="field-right">
+                            <input type="text" name="{{item.title}}" placeholder="Option Name" [(ngModel)]="option.value"></span>
+                    </div>
+
                 </div>
-                <button (click)=addOption(item)>Add Option</button>
-                <hr>
+                <button class="optn-btn" (click)=addOption(item)>Add Option</button>
+
             </div>
         </div>
-        <hr>
-        <div class="btns">
 
+        <div class="btns">
             <button (click)="addComponent('text')">Add Text Input</button>
             <button (click)="addComponent('radio')">Add Radio</button>
             <button (click)="addComponent('dropdown')">Add Dropdown</button>
             <button (click)="addComponent('static')">Add Paragraph</button>
         </div>
     </div>
-    <button (click)="downloadJson()"> Download JSON</button>
-    <button (click)="newMessage()">Set value</button>
+    <div class="action-btns">
+        <button (click)="downloadJson()"> Download JSON</button>
+        <button (click)="newMessage()">View Form</button>
+    </div>
 </div>
 <a id="downloadAnchorElem" style="display:none"></a>

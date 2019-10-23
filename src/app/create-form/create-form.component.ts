@@ -16,8 +16,6 @@ export class CreateFormComponent implements OnInit {
     this.shareForm.formStateObservable.subscribe(
       message => {
         this.formJson = message;
-        console.log(this.formJson);
-        
       });
   }
 
@@ -30,7 +28,7 @@ export class CreateFormComponent implements OnInit {
 
   addComponent(type) {
     let component: any = {
-      title: '',
+      title: 'Untitled Field',
       inputType: type
     }
     if (type == 'radio' || type == 'dropdown') {
@@ -48,10 +46,10 @@ export class CreateFormComponent implements OnInit {
   }
 
   downloadJson() {
-    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.formJson));
+    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.formJson, null, 4));
     var dlAnchorElem = document.getElementById('downloadAnchorElem');
     dlAnchorElem.setAttribute("href", dataStr);
-    dlAnchorElem.setAttribute("download", `${this.formJson.title}_form.json`);
+    dlAnchorElem.setAttribute("download", `${this.formJson.formName}_form.json`);
     dlAnchorElem.click();
   }
 
