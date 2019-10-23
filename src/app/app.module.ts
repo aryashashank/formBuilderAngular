@@ -15,7 +15,7 @@ const appRoutes: Routes = [
   { path: 'view', component: ViewFormComponent },
   { path: 'create', component: CreateFormComponent },
   { path: '',
-    redirectTo: '/view',
+    redirectTo: '/create',
     pathMatch: 'full'
   }
 ];
