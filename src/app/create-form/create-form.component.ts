@@ -32,7 +32,7 @@ export class CreateFormComponent implements OnInit {
       inputType: type
     }
     if (type == 'radio' || type == 'dropdown') {
-      component.options = [{value: ''}];
+      component.options = [{value: ''},{value: ''}];
     }
     if (type == 'static') {
       component.value = '';
